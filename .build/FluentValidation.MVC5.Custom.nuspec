@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>FluentValidation.MVC5.Custom</id>
-    <version></version>
+    <version>1.0.0</version>
     <authors>John Doe</authors>
     <licenseUrl>http://fluentvalidation.codeplex.com/license</licenseUrl>
     <projectUrl>https://github.com/lokki/FluentValidation</projectUrl>
