@@ -120,6 +120,30 @@ namespace FluentValidation.Mvc {
 			return modelValidators;
 		}
 
+#if MVC5
+
+        private ModelValidator GetModelValidator(ModelMetadata meta, ControllerContext context, PropertyRule rule, IPropertyValidator propertyValidator)
+        {
+            var types = UnwrapValidator(meta, propertyValidator);
+
+            var factory = validatorFactories
+                .Where(x => x.Key.IsAssignableFrom(types.Item1))
+                .Select(x => x.Value)
+                .FirstOrDefault() ?? ((metadata, controllerContext, description, validator) => new FluentValidationPropertyValidator(metadata, controllerContext, description, validator));
+
+            return factory(meta, context, rule, types.Item2);
+        }
+
+        private static Tuple<Type, IPropertyValidator> UnwrapValidator(ModelMetadata metadata, IPropertyValidator propertyValidator)
+        {
+            var delegator = propertyValidator as DelegatingValidator;
+            if (delegator == null || metadata.Container == null || !delegator.CheckCondition(metadata.Container))
+                return Tuple.Create(propertyValidator.GetType(), propertyValidator);
+
+            return Tuple.Create(delegator.InnerValidator.GetType(), delegator.InnerValidator);
+        }
+#else
+
 		private ModelValidator GetModelValidator(ModelMetadata meta, ControllerContext context, PropertyRule rule, IPropertyValidator propertyValidator) {
 			var type = propertyValidator.GetType();
 			
@@ -130,12 +154,11 @@ namespace FluentValidation.Mvc {
 
 			return factory(meta, context, rule, propertyValidator);
 		}
+#endif
 
 		ModelValidator CreateNotNullValidatorForProperty(ModelMetadata metadata, ControllerContext cc) {
 			return new RequiredFluentValidationPropertyValidator(metadata, cc, null, new NotNullValidator());
 		}
-
-
 
 		IEnumerable<ModelValidator> GetValidatorsForModel(ModelMetadata metadata, ControllerContext context, IValidator validator) {
 			if (validator != null) {

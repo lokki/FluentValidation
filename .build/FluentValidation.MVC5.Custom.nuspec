@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>FluentValidation.MVC5.Custom</id>
+    <version></version>
+    <authors>John Doe</authors>
+    <licenseUrl>http://fluentvalidation.codeplex.com/license</licenseUrl>
+    <projectUrl>https://github.com/lokki/FluentValidation</projectUrl>
+    <iconUrl>http://download.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=FluentValidation&amp;DownloadId=166226</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Custom ASP.NET MVC 5 integration for FluentValidation</description>
+    <summary>Custom ASP.NET MVC 5 integration for FluentValidation</summary>
+    <language>en-US</language>
+    <releaseNotes>https://github.com/lokki/FluentValidation/blob/master/Changelog.txt</releaseNotes>
+    <dependencies>
+      <dependency id="FluentValidation" version="" />
+			<dependency id="Microsoft.AspNet.Mvc" version="[5.1,5.3)" />
+    </dependencies>
+  </metadata>
+</package>
