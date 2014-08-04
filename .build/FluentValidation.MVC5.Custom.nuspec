@@ -18,6 +18,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\FluentValidation.Mvc5\bin\Release\FluentValidation.Mvc.dll" target="lib\net45" />
+    <file src="..\src\FluentValidation.Mvc5\bin\Release\FluentValidation.Mvc.dll" target="lib\net45" />
   </files>
 </package>
